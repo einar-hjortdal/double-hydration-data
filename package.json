@@ -1,0 +1,31 @@
+{
+  "name": "double-hydration-data",
+  "license": "NCSA",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "clean:browser": "rm -rf ./build/browser",
+    "clean:server": "rm -rf ./build/server",
+    "clean:all": "bun run clean:browser && bun run clean:server",
+    "test": "bun test",
+    "build:browser": "bun build ./src/browser/index.jsx --outdir ./build/browser/_public/ --public-path /_public/ --splitting",
+    "build:server": "bun build ./src/server/index.jsx --outdir ./build/server --target=bun --public-path /_public/",
+    "build": "bun run clean:all && bun run build:browser --minify --sourcemap=external && bun run build:server",
+    "start": "bun run ./build/server/index.js",
+    "dev:browser": "mkdir -p build/browser && bun run build:browser --watch",
+    "dev:server": "bun run build:server --watch",
+    "dev:start": "while [ ! -f ./build/server/index.js ]; do sleep 0.5; done && bun run --watch ./build/server/index.js",
+    "dev": "bun run clean:all && (bun run dev:browser & pid_browser=$; bun run dev:server & pid_server=$; bun run dev:start & pid_start=$; wait; kill $pid_browser $pid_server $pid_start)"
+  },
+  "devDependencies": {
+    "standard": "^17.1.2"
+  },
+  "dependencies": {
+    "@dark-engine/core": "^1.5.1",
+    "@dark-engine/platform-browser": "^1.5.1",
+    "@dark-engine/platform-server": "^1.5.1",
+    "@dark-engine/web-router": "^1.5.1",
+    "@wareme/utils": "^3.12.1",
+    "elysia": "^1.2.25"
+  }
+}
