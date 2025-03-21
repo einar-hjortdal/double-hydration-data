@@ -5,6 +5,7 @@
       "name": "double-hydration-data",
       "dependencies": {
         "@dark-engine/core": "^1.5.1",
+        "@dark-engine/data": "^1.5.1",
         "@dark-engine/platform-browser": "^1.5.1",
         "@dark-engine/platform-server": "^1.5.1",
         "@dark-engine/web-router": "^1.5.1",
@@ -18,6 +19,8 @@
   },
   "packages": {
     "@dark-engine/core": ["@dark-engine/core@1.5.1", "", {}, "sha512-2U92ZRCOKJiJzaBdbewG+8hfC72C3FX4md4ybRdBe3e6urSI/u7HjuHw45lfBzHx40uR6EWRyiJv0AYOOqgmqg=="],
+
+    "@dark-engine/data": ["@dark-engine/data@1.5.1", "", { "peerDependencies": { "@dark-engine/core": "*" } }, "sha512-1NVk/Fadv9ydl8v0yLC0WkyTCsfE3naQsn6xwuuxAq95KVaxLGmonSz8BSsf5QGkZYD80a6lWatgLOKPGbiyUA=="],
 
     "@dark-engine/platform-browser": ["@dark-engine/platform-browser@1.5.1", "", { "peerDependencies": { "@dark-engine/core": "*" } }, "sha512-4J0b5nNaxJazW41AveMN+VhADObkhere5cwf5u3CROIdjIhu/hyffOu14kPNymVDX2+w7vddoFYkfvCeZA+tZA=="],
 

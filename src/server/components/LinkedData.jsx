@@ -1,4 +1,5 @@
-import { component, detectIsString } from '@dark-engine/core'
+import { component, detectIsString, stringify } from '@dark-engine/core'
+import { useApi, useQuery } from '@dark-engine/data'
 import { detectIsEmptyString, freeze } from '@wareme/utils'
 
 import { config } from '../../shared/config'
@@ -130,8 +131,17 @@ const getContactLinkedData = (description) => {
 }
 
 const LinkedData = component(() => {
-  const data = getContactLinkedData()
-  return <script type='application/ld+json' __danger={JSON.stringify(data)} />
+  // data fetched during SSR, does not need hydration
+  // I do not want to send unnecessary serialized data to the client
+  // I would like to dehydrate manually only the data that needs to be hydrated on the browser
+  const api = useApi()
+  const { data } = useQuery('facts', api.catsRetrieve)
+  if (data) {
+    const linkedData = getContactLinkedData(stringify(data))
+    return <script type='application/ld+json' __danger={stringify(linkedData)} />
+  }
+
+  return null
 })
 
 export default LinkedData
